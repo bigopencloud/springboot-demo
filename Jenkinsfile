@@ -20,12 +20,12 @@ node {
     stage 'Build the Source Code'
       
     // Create and set an Artifactory Maven Build instance:
-    def rtMaven = Artifactory.newMavenBuild()
-    rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
-    rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
+    //def rtMaven = Artifactory.newMavenBuild()
+    //rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
+    //rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
     
     // Optionally include or exclude artifacts to be deployed to Artifactory:
-    rtMaven.deployer.artifactDeploymentPatterns.addInclude("frog*").addExclude("*.zip")
+    //rtMaven.deployer.artifactDeploymentPatterns.addInclude("frog*").addExclude("*.zip")
     
     // Set a Maven Tool defined in Jenkins "Manage":
     rtMaven.tool = 'M3'
