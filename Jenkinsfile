@@ -17,7 +17,7 @@ node {
    }
 
    // Mark the code build 'stage'....Run the maven build
-    stage 'Build the Source Code'
+    stage ('Build the Source Code') {
       
     // Create and set an Artifactory Maven Build instance:
     //def rtMaven = Artifactory.newMavenBuild()
@@ -37,10 +37,11 @@ node {
 
     
     // Publish the build-info to Artifactory:
-    server.publishBuildInfo buildInfo
+    //server.publishBuildInfo buildInfo
     //sh 'mvn clean package docker:build'
+    }
 
-   stage 'Build The Docker Image'
+   stage ('Build The Docker Image') {
    //def dockerBuildInfo = rtMaven.run pom: 'pom.xml', goals: 'docker:build'
    
    stage 'Run the Docker Container created'
@@ -54,6 +55,7 @@ node {
     echo "building the docker image ${imageName}"
 
     sh "docker build -f src/main/docker/Dockerfile -t ${imageName} ."
+   }
 
     echo "It appears that build url ${env.BUILD_URL} is success"
       
