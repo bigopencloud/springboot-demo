@@ -1,6 +1,6 @@
 node {
 
-   env.JAVA_HOME = tool 'JDK1.8'
+   env.JAVA_HOME = tool 'Openjdk-1.8.0'
    def mvnHome = tool 'Maven-3.3.9'
    env.PATH = "${mvnHome}/bin:${env.JAVA_HOME}/bin:${env.PATH}"
    
