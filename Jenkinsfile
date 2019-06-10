@@ -19,26 +19,15 @@ node {
    // Mark the code build 'stage'....Run the maven build
     stage ('Build the Source Code') {
       
-    // Create and set an Artifactory Maven Build instance:
-    //def rtMaven = Artifactory.newMavenBuild()
-    //rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
-    //rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
-    
-    // Optionally include or exclude artifacts to be deployed to Artifactory:
-    //rtMaven.deployer.artifactDeploymentPatterns.addInclude("frog*").addExclude("*.zip")
-    
-    // Set a Maven Tool defined in Jenkins "Manage":
-    rtMaven.tool = 'M3'
-    // Optionally set Maven Ops
-    rtMaven.opts = '-Xms1024m -Xmx4096m'
-    
-    // Run Maven:
-    def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean package'
+    stage('Build') {
+      // Run the maven build
+      withEnv(["MVN_HOME=$mvnHome"]) {
+         if (isUnix()) {
+            sh '"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean package'
+         } else {
+            bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+         }
 
-    
-    // Publish the build-info to Artifactory:
-    //server.publishBuildInfo buildInfo
-    //sh 'mvn clean package docker:build'
     }
 
    stage ('Build The Docker Image') {
