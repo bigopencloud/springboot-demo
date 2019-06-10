@@ -1,7 +1,7 @@
 node {
 
    env.JAVA_HOME = tool 'Openjdk-1.8.0'
-   def mvnHome = tool 'Maven-3.3.9'
+   def mvnHome = tool 'M3'
    env.PATH = "${mvnHome}/bin:${env.JAVA_HOME}/bin:${env.PATH}"
    
    // Create an Artifactory server instance
@@ -14,7 +14,6 @@ node {
       // Get the Maven tool.
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.           
-      mvnHome = tool 'M3'
    }
 
    // Mark the code build 'stage'....Run the maven build
