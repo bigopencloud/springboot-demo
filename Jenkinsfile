@@ -18,8 +18,6 @@ node {
 
    // Mark the code build 'stage'....Run the maven build
     stage ('Build the Source Code') {
-      
-    stage('Build') {
       // Run the maven build
       withEnv(["MVN_HOME=$mvnHome"]) {
          if (isUnix()) {
@@ -28,6 +26,7 @@ node {
             bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean package/)
          }
 
+    }
     }
 
    stage ('Build The Docker Image') {
